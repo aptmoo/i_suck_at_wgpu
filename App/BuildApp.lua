@@ -18,16 +18,18 @@ project "App"
         -- Deps
         "../Dependencies/GLFW/include",
         "../BinaryDependencies/",
+        "../BinaryDependencies/wgpu/include",
     }
 
     libdirs
     {
         "../BinaryDependencies/",
+        "../BinaryDependencies/wgpu/",
     }
 
     links
     {
-        "GLFW",
+        "GLFW", "wgpu_native:static"    -- Force wgpu static link
     }
 
     targetdir ("../Binaries/")
@@ -39,8 +41,8 @@ project "App"
 
     filter "system:linux"
         defines { "PLATFORM_LINUX" }
-        libdirs { "/usr/lib", "../lib", }
-        links { "dl", "m", "pthread", "GL" }
+        libdirs { "/usr/lib", "../lib", "../BinaryDependencies/wgpu/linux_x64/",}
+        links { "dl", "m", "pthread", }
         targetname "App.out"
 
     filter "configurations:Debug"

@@ -39,4 +39,4 @@ Makefile
 *.make
 
 # Exclude deps
-!BinaryDependencies/
+!BinaryDependencies/**
